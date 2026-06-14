@@ -1,0 +1,46 @@
+name: AI Agents Swarm Execution
+
+on:
+  schedule:
+    - cron: '0 * * * *' # يعمل كل ساعة
+  workflow_dispatch: # يسمح بالتشغيل اليدوي
+
+jobs:
+  run-agents:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Agents Swarm
+        env:
+          ALPHA_GROQ: ${{ secrets.ALPHA_GROQ }}
+          BETA_GROQ: ${{ secrets.BETA_GROQ }}
+          GAMMA_GROQ: ${{ secrets.GAMMA_GROQ }}
+          DELTA_GROQ: ${{ secrets.DELTA_GROQ }}
+          EPSILON_GROQ: ${{ secrets.EPSILON_GROQ }}
+        run: |
+          # تشغيل الوكلاء بالتوازي أو بالتتابع
+          python3 agents/agent_alpha/main.py &
+          python3 agents/agent_beta/main.py &
+          python3 agents/agent_gamma/main.py &
+          python3 agents/agent_delta/main.py &
+          python3 agents/agent_epsilon/main.py &
+          wait
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "GitHub Action Agent"
+          git config --global user.email "action@github.com"
+          git add .
+          git commit -m "Update knowledge base and agent memory [skip ci]" || echo "No changes to commit"
+          git push
