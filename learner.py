@@ -1,7 +1,7 @@
 import json
 import os
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 KB_DIR = os.path.join(BASE_DIR, "knowledge_base")
 KNOWLEDGE_BASE_FILE = os.path.join(KB_DIR, "learned_knowledge.json")
 

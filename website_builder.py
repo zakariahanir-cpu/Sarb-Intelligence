@@ -4,7 +4,7 @@ def create_web_project(agent_name, project_name, files):
     """
     ينشئ مشروع موقع ويب في مجلد الوكيل باستخدام مسارات نسبية.
     """
-    BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     project_path = os.path.join(BASE_DIR, 'agents', agent_name, project_name)
     os.makedirs(project_path, exist_ok=True)
     
