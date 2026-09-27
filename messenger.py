@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 
 # تحديد المسار النسبي لملف الرسائل
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MESSAGES_DIR = os.path.join(BASE_DIR, "communication_hub", "messages")
 MESSAGES_FILE = os.path.join(MESSAGES_DIR, "log.txt")
 

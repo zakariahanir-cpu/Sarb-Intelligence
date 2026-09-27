@@ -1,10 +1,10 @@
 import os
 import json
 import requests
-from shared_tools.duckduckgo_search import search_duckduckgo
-from shared_tools.messenger import send_message, read_messages
-from shared_tools.website_builder import create_web_project
-from shared_tools.learner import save_knowledge, get_knowledge
+from duckduckgo_search import search_duckduckgo
+from messenger import send_message, read_messages
+from website_builder import create_web_project
+from learner import save_knowledge, get_knowledge
 
 class Agent:
     def __init__(self, name, api_key):
@@ -14,7 +14,7 @@ class Agent:
         self.api_url = "https://api.groq.com/openai/v1/chat/completions"
         
         # تحديد المسار الأساسي للمشروع بشكل ديناميكي
-        self.base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+        self.base_dir = os.path.dirname(os.path.abspath(__file__))
         self.agent_dir = os.path.join(self.base_dir, 'agents', name)
         self.memory_path = os.path.join(self.agent_dir, 'memory.json')
         
