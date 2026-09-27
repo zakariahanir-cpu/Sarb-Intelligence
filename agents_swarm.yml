@@ -4,6 +4,8 @@ on:
   schedule:
     - cron: '0 * * * *' # يعمل كل ساعة
   workflow_dispatch: # يسمح بالتشغيل اليدوي
+  pull_request:
+    branches: [main]
 
 jobs:
   run-agents:
